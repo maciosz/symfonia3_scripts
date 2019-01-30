@@ -1,0 +1,32 @@
+calculate_coverage_over_features.py to właściwy skrypt
+    potrzebuje outputu bedtools intersect -wao interwaly.bed pokrycie.bedgraph > bedtools_output
+    przykładowe użycie:
+    ./calculate_coverage_over_features.py bedtools_output output coordinates [sum]
+    wynik:
+    plik 'output' ze średnim / sumarycznym pokryciem na interwałach
+    dla opcji 'coordinates' zakłada że interwaly.bed ma tylko trzy kolumny i outputuje koordynaty
+    dla opcji 'ids' zakłada sześć kolumn i outputuje ID (czwartą kolumnę)
+    dla opcji sum liczy sumę, domyślnie średnią
+
+calculate_coverages.sh
+    tworzy za pomocą bedtoolsów (i potem usuwa) input potrzebny skryptowi pythonowemu
+    a potem wywołuje powyższy skrypt
+        (uwaga: w przedostatniej linii jest podana ścieżka do powyższego skryptu, trzeba ją przeedytować na właściwą)
+    zakłada nazewnictwo plików które przyjęliśmy w Symfonii
+    przykładowe użycie:
+    ./calculate_coverages.sh features.bed H3K27me3_GB01_ignonred_part.bedgraph output_suffix coordinates [sum]
+    wynik:
+    H3K27me3_GB01_coverage_output_suffix.tsv
+
+calculate_coverages_CZD.sh
+calculate_coverages_IPIN.sh
+calculate_coverages_WUM.sh
+    skrypty pomocnicze ze zhardkodwanymi plikami i ścieżkami
+    nie biorą argumentów
+
+merge_results*.sh
+    zlepia wyniki dla kilku pacjentów
+    ma shardkodowane nazwy i ścieżki, wymaga modyfikacji
+    '_coords.sh' zakłada wynik 'coordinates', '_id' zakłada 'ids'
+        (różni się kolumnami do cutowania i headerem)
+    
