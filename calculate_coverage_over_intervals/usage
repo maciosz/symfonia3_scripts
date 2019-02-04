@@ -18,12 +18,6 @@ calculate_coverages.sh
     wynik:
     H3K27me3_GB01_coverage_output_suffix.tsv
 
-calculate_coverages_CZD.sh
-calculate_coverages_IPIN.sh
-calculate_coverages_WUM.sh
-    skrypty pomocnicze ze zhardkodwanymi plikami i ścieżkami
-    nie biorą argumentów
-
 merge_results*.sh
     zlepia wyniki dla kilku pacjentów
     ma shardkodowane nazwy i ścieżki, wymaga modyfikacji
