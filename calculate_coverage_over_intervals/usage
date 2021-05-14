@@ -1,26 +1,28 @@
-calculate_coverage_over_features.py to właściwy skrypt
-    potrzebuje outputu bedtools intersect -wao interwaly.bed pokrycie.bedgraph > bedtools_output
-    przykładowe użycie:
-    ./calculate_coverage_over_features.py bedtools_output output coordinates [sum]
-    wynik:
-    plik 'output' ze średnim / sumarycznym pokryciem na interwałach
-    dla opcji 'coordinates' zakłada że interwaly.bed ma tylko trzy kolumny i outputuje koordynaty
-    dla opcji 'ids' zakłada sześć kolumn i outputuje ID (czwartą kolumnę)
+calculate_coverage_over_features.py is the main script
+    it needs output of the following command:
+        bedtools intersect -wao intervals.bed coverage.bedgraph > bedtools_output
+    usage:
+    ./calculate_coverage_over_features.py bedtools_output output [coordinates/ids] [sum]
+    result:
+    'output' file with mean / cummulative coverage over intervals
+    option 'coordinates': assume intervals.bed has three columns, outputs coordinates
+    option ids: assume intervals.bed has six columns, outputs ID/name (the fourth column)
+    by default mean coverage is calculated, if you add option 'sum': cummulative
     dla opcji sum liczy sumę, domyślnie średnią
 
 calculate_coverages.sh
-    tworzy za pomocą bedtoolsów (i potem usuwa) input potrzebny skryptowi pythonowemu
-    a potem wywołuje powyższy skrypt
-        (uwaga: w przedostatniej linii jest podana ścieżka do powyższego skryptu, trzeba ją przeedytować na właściwą)
-    zakłada nazewnictwo plików które przyjęliśmy w Symfonii
-    przykładowe użycie:
-    ./calculate_coverages.sh features.bed H3K27me3_GB01_ignonred_part.bedgraph output_suffix coordinates [sum]
-    wynik:
+    that's a wrapper for the script above
+    using bedtools it creates (and then removes) input needed for calculate_coverage_over_features.py
+    then it runs the script
+    it assumes the naming convention used in the Symfonia grant,
+        i.e. coverage file is assumed to be called [experiment]_[patient]_[whatever_you_like].bedgraph
+    example usage:
+    ./calculate_coverages.sh features.bed H3K27me3_GB01_ignored_part.bedgraph output_suffix coordinates [sum]
+    result will be called:
     H3K27me3_GB01_coverage_output_suffix.tsv
 
 merge_results*.sh
-    zlepia wyniki dla kilku pacjentów
-    ma shardkodowane nazwy i ścieżki, wymaga modyfikacji
-    '_coords.sh' zakłada wynik 'coordinates', '_id' zakłada 'ids'
-        (różni się kolumnami do cutowania i headerem)
+    some helping scripts I used to merge results for several patients
+    they have names and paths hard-coded, so they may need some modifications
+    use "*_coords.sh" for results obtained with "coordinates" option, "*_id.sh" with "ids" option
     

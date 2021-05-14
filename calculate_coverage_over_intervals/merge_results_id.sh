@@ -1,10 +1,10 @@
-cut -f1 H3K4me3_WUM20160909_coverage_on_promoters.tsv > H3K4me3_coverage_on_promoters.tsv
+cut -f1 H3K4me3_DA01_coverage_on_promoters.tsv > H3K4me3_coverage_on_promoters.tsv
 
-for plik in H3K4me3_*201*on_promoters.tsv
+for file in H3K4me3_*on_promoters.tsv
 do
-    nazwa=$(echo $plik | cut -f2 -d'_')
-    echo $nazwa >> H3K4me3_patients.txt
-    cut -f2 $plik | paste H3K4me3_coverage_on_promoters.tsv - > tmp
+    name=$(echo $plik | cut -f2 -d'_')
+    echo $name >> H3K4me3_patients.txt
+    cut -f2 $file | paste H3K4me3_coverage_on_promoters.tsv - > tmp
     mv tmp H3K4me3_coverage_on_promoters.tsv
 done
 
